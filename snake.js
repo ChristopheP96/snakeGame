@@ -13,6 +13,10 @@ function Snake(maxRows, maxColumns) {
   
 }
 
+Snake.prototype.start = function () {
+  this.move();
+}
+
 Snake.prototype.move = function () {
   if (!this.intervalId) {
     this.intervalId = setInterval(this._moveForward.bind(this), 100);

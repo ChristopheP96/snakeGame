@@ -48,6 +48,13 @@ Game.prototype._assignControlsToKeys = function () {
       case 39: //arrow right
         this.snake.goRight();
         break; 
+      case 80: // p pause
+        if (this.snake.intervalId) {
+          this.snake.stop();
+        } else {
+          this.snake.start();
+        }
+        break;
     }
   }.bind(this);
 }
