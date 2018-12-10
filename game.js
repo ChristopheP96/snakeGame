@@ -7,6 +7,7 @@ class Game {
     this.columns = options.columns;
     this.ctx = options.ctx;
     this.updatePointsCB = undefined;
+    this.points = 0;
   }
 
   _drawBoard () {
@@ -29,6 +30,7 @@ class Game {
     this._assignControlsToKeys();
     this._generateFood();
     this.snake.move();
+    this._update();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     this.updatePointsCB = updatePointsCB;
   }
@@ -73,26 +75,33 @@ class Game {
   _update () {
     this._drawBoard();
     this._drawSnake();
-
+    console.log('update')
     if ( this.snake.hasEatenFood(this.food) ) {
       this.snake.grow();
       this._generateFood();
       this._drawFood();
-      this.updatePointsCB()
+      this.points++;
+      this.updatePointsCB(this.points);
     }
     if ( this.snake.hasEatenItSelf() ) {
       this.snake.stop();
-      this.stop();
-      alert('gameover');
+      this.pause();
+      // this.gameOver();
+      // window.cancelAnimationFrame(this.intervalGame);
+      this.onGameOver()
     }
-    this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+    if (this.intervalGame !== undefined) {
+      this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+    }
   }
 
-  stop () {
+  pause () {
     if (this.intervalGame) {
-      clearInterval(this.intervalGame)
+      // clearInterval(this.intervalGame)
+      window.cancelAnimationFrame(this.intervalGame);
       this.intervalGame = undefined;
     }
   }
+
 }
 
