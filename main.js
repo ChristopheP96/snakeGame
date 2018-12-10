@@ -15,9 +15,9 @@ document.onload = function() {
   });
 
   game.onGameOver = () => {
-    console.log('asd')
     let gameOver = document.getElementById('gameover');
     canvas.style = 'display: none';
+    gameOver.style = 'display: block';
   }
 
 }();

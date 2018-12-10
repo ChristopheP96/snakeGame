@@ -73,9 +73,9 @@ class Game {
   }
 
   _update () {
+    this.clear();
     this._drawBoard();
     this._drawSnake();
-    console.log('update')
     if ( this.snake.hasEatenFood(this.food) ) {
       this.snake.grow();
       this._generateFood();
@@ -86,18 +86,20 @@ class Game {
     if ( this.snake.hasEatenItSelf() ) {
       this.snake.stop();
       this.pause();
-      // this.gameOver();
-      // window.cancelAnimationFrame(this.intervalGame);
       this.onGameOver()
     }
     if (this.intervalGame !== undefined) {
       this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     }
+    // this.ctx.clearRect(0, 0, this.rows * 10, this.columns * 10);
+  }
+
+  clear() {
+    this.ctx.clearRect(0, 0, this.rows * 10, this.columns * 10);
   }
 
   pause () {
     if (this.intervalGame) {
-      // clearInterval(this.intervalGame)
       window.cancelAnimationFrame(this.intervalGame);
       this.intervalGame = undefined;
     }
