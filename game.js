@@ -1,5 +1,4 @@
 class Game {
-
   constructor(options) {
     this.snake = options.snake;
     this.food = undefined;
