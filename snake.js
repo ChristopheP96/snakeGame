@@ -85,7 +85,6 @@ class Snake {
     }
   }
 
-
   collidesWith (position) {
     return this.body.some(bodyPiece => {
       return bodyPiece.row === position.row && bodyPiece.column === position.column;
@@ -93,6 +92,7 @@ class Snake {
   };
 
   hasEatenItSelf () {
+    // the only way to check if the head's position is inside of my body
     return this.body.some((element, index, array) => {
       return (element.row === array[0].row && element.column === array[0].column && index != 0);
     });
