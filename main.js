@@ -13,6 +13,7 @@ document.onload = function() {
   game.start((points) => {
     console.log(points);
   });
+  
 
   game.onGameOver = () => {
     let gameOver = document.getElementById('gameover');
